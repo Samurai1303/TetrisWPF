@@ -54,5 +54,42 @@
 
             return true;
         }
+
+        private void ClearRow (int r)
+        {
+            for (int c = 0; c < Columns; c++)
+            {
+                grid[r, c] = 0;
+            }
+        }
+
+        private void MoveRowDown (int r, int numRows)
+        {
+            for (int c = 0; c < Columns; c++)
+            {
+                grid[r + numRows, c] = grid[r, c];
+                grid[r, c] = 0;
+            }
+        }
+
+        public int ClearFullRows ()
+        {
+            int cleared = 0;
+
+            for (int r = Rows - 1; r >= 0; r--)
+            {
+                if (IsRowFull(r))
+                {
+                    ClearRow(r);
+                    cleared++;
+                }
+                else if (cleared > 0)
+                {
+                    MoveRowDown(r, cleared);
+                }
+            }
+
+            return cleared;
+        }
     }
 }
