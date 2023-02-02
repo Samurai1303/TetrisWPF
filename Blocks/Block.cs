@@ -44,7 +44,7 @@ namespace TetrisWPF
         public void Move (int rows, int columns)
         {
             offset.Row += rows;
-            offset.Column = columns;
+            offset.Column += columns;
         }
 
         public void Reset ()
