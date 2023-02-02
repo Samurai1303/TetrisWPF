@@ -7,4 +7,46 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\Images\Background.png" />
+    <None Remove="Assets\Images\Block-Empty.png" />
+    <None Remove="Assets\Images\Block-I.png" />
+    <None Remove="Assets\Images\Block-J.png" />
+    <None Remove="Assets\Images\Block-L.png" />
+    <None Remove="Assets\Images\Block-O.png" />
+    <None Remove="Assets\Images\Block-S.png" />
+    <None Remove="Assets\Images\Block-T.png" />
+    <None Remove="Assets\Images\Block-Z.png" />
+    <None Remove="Assets\Images\Icon.ico" />
+    <None Remove="Assets\Images\TileBlue.png" />
+    <None Remove="Assets\Images\TileCyan.png" />
+    <None Remove="Assets\Images\TileEmpty.png" />
+    <None Remove="Assets\Images\TileGreen.png" />
+    <None Remove="Assets\Images\TileOrange.png" />
+    <None Remove="Assets\Images\TilePurple.png" />
+    <None Remove="Assets\Images\TileRed.png" />
+    <None Remove="Assets\Images\TileYellow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\Background.png" />
+    <Resource Include="Assets\Images\Block-Empty.png" />
+    <Resource Include="Assets\Images\Block-I.png" />
+    <Resource Include="Assets\Images\Block-J.png" />
+    <Resource Include="Assets\Images\Block-L.png" />
+    <Resource Include="Assets\Images\Block-O.png" />
+    <Resource Include="Assets\Images\Block-S.png" />
+    <Resource Include="Assets\Images\Block-T.png" />
+    <Resource Include="Assets\Images\Block-Z.png" />
+    <Resource Include="Assets\Images\Icon.ico" />
+    <Resource Include="Assets\Images\TileBlue.png" />
+    <Resource Include="Assets\Images\TileCyan.png" />
+    <Resource Include="Assets\Images\TileEmpty.png" />
+    <Resource Include="Assets\Images\TileGreen.png" />
+    <Resource Include="Assets\Images\TileOrange.png" />
+    <Resource Include="Assets\Images\TilePurple.png" />
+    <Resource Include="Assets\Images\TileRed.png" />
+    <Resource Include="Assets\Images\TileYellow.png" />
+  </ItemGroup>
+
 </Project>
