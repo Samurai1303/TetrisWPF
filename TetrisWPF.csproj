@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Images\Background.png" />
+    <None Remove="Assets\Images\Background.jpg" />
     <None Remove="Assets\Images\Block-Empty.png" />
     <None Remove="Assets\Images\Block-I.png" />
     <None Remove="Assets\Images\Block-J.png" />
@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Images\Background.png" />
+    <Resource Include="Assets\Images\Background.jpg" />
     <Resource Include="Assets\Images\Block-Empty.png" />
     <Resource Include="Assets\Images\Block-I.png" />
     <Resource Include="Assets\Images\Block-J.png" />

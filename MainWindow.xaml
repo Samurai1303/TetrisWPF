@@ -5,30 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TetrisWPF"
         mc:Ignorable="d"
-        Title="Tetris" Height="600" Width="800"
-        MinWidth="600" MinHeight="600"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="TetrisWPF" Height="1000" Width="725"
         Foreground="White"
         FontFamily="Segoe UI Light" FontSize="28"
         KeyDown="Window_KeyDown">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="BlueColor" Color="#242282"/>
+        <SolidColorBrush x:Key="TextColor" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="MouseOverColor" Color="#121143"/>
+        <SolidColorBrush x:Key="ButtonPressedColor"  Color="#0f0e36"/>
+
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource BlueColor}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+            <Setter Property="Padding" Value="12, 6, 12, 6"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="btnBorder" CornerRadius="8"
+                                Background="{TemplateBinding Background}"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="btnBorder" 
+                                        Property="Background" 
+                                        Value="{DynamicResource MouseOverColor}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="btnBorder" 
+                                        Property="Background" 
+                                        Value="{DynamicResource ButtonPressedColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.Background>
-            <ImageBrush ImageSource="Assets/Images/Background.png"/>
+            <ImageBrush ImageSource="Assets/Images/Background.jpg"
+                        Stretch="UniformToFill"
+                        AlignmentX="Center"/>
         </Grid.Background>
 
-        <Viewbox Grid.Row="1"
-                 Grid.Column="1"
-                 Margin="0,0,0,20">
+        <Viewbox Grid.Column="0"
+                 Margin="40,40,0,40">
             <Canvas x:Name="GameCanvas"
                     Background="#101010"
                     Width="250"
@@ -37,35 +90,50 @@
                     Loaded="GameCanvas_Loaded"/>
         </Viewbox>
 
-        <TextBlock x:Name="ScoreText"
-                   Grid.Row="0"
-                   Grid.Column="1"
-                   Text="Score: "
-                   Margin="0, 10"
-                   TextAlignment="Center"/>
+        <StackPanel Grid.Row="0"
+                    Grid.Column ="1"
+                    Margin="20, 40, 20, 40">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Next"
+                           TextAlignment="Center"/>
+                <Image x:Name="NextImage"
+                       Margin="10, 0, 10, 10"
+                       Height="150"
+                       Width="150"/>
+            </StackPanel>
 
-        <StackPanel Grid.Row="1"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right">
-            <TextBlock Text="Hold"
-                       TextAlignment="Center"/>
+            <StackPanel HorizontalAlignment="Center"
+                        Margin="0, 20">
+                <TextBlock Text="Hold"
+                           TextAlignment="Center"/>
 
-            <Image x:Name="HoldImage"
-                   Margin="20"
-                   Width="125"/>
-        </StackPanel>
+                <Image x:Name="HoldImage"
+                       Margin="10, 0, 10, 10"
+                       Height="150"
+                       Width="150"/>
+            </StackPanel>
 
-        <StackPanel Grid.Row="1"
-                    Grid.Column="2"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left">
-            <TextBlock Text="Next"
-                       TextAlignment="Center"/>
+            <StackPanel HorizontalAlignment="Left"
+                        Margin="0, 30, 0, 70">
+                <TextBlock x:Name="HighScoreText"
+                           Text="High Score: 9999"
+                           TextAlignment="Left"/>
 
-            <Image x:Name="NextImage"
-                   Margin="20"
-                   Width="125"/>
+                <TextBlock x:Name="ScoreText"
+                           Text="Score: 9999"
+                           TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center">
+                <Button Content="Play Again" 
+                        Style="{DynamicResource ButtonStyle}"
+                        Width="200"
+                        Margin="0, 115, 0, 25"
+                        Click="PlayAgain_Click"/>
+                <Button Content="Exit" 
+                        Style="{DynamicResource ButtonStyle}"
+                        Width="200"/>
+            </StackPanel>
         </StackPanel>
 
         <Grid x:Name="GameOverMenu"
