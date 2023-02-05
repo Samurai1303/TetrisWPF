@@ -28,7 +28,6 @@
         public BlockQueue BlockQueue { get; }
         public bool GameOver { get; private set; }
         public bool Paused { get; set; }
-        public bool Terminate { get; set; }
         public int LinesCleared { get; set; }
         public int Level { get; private set; }
         public int Score { get; private set; }
