@@ -39,8 +39,9 @@ namespace TetrisWPF
 
         private readonly Image[,] imageControls;
         private readonly int maxDelay = 1000;
-        private readonly int minDelay = 75;
-        private readonly int delayDecrease = 25;
+        private readonly int minDelay = 175;
+        private readonly int delayDecrease = 15;
+        private bool Terminate = false;
 
         private GameState gameState = new GameState();
 
@@ -133,6 +134,7 @@ namespace TetrisWPF
             DrawBlock(gameState.CurrentBlock);
             DrawNextBlock(gameState.BlockQueue);
             DrawHeldBlock(gameState.HeldBlock);
+            HighScoreText.Text = $"High Score: {gameState.HighScore}";
             ScoreText.Text = $"Score: {gameState.Score}";
         }
 
@@ -142,7 +144,17 @@ namespace TetrisWPF
 
             while (!gameState.GameOver)
             {
-                int delay = Math.Max(minDelay, maxDelay - (gameState.Score * delayDecrease));
+                while (gameState.Paused)
+                {
+                    await Task.Delay(1);
+                }
+
+                if (Terminate)
+                {
+                    return;
+                }
+
+                int delay = Math.Max(minDelay, maxDelay - (gameState.LinesCleared * delayDecrease));
                 await Task.Delay(delay);
                 gameState.MoveBlockDown();
                 Draw(gameState);
@@ -155,6 +167,10 @@ namespace TetrisWPF
         private void Window_KeyDown (object sender, KeyEventArgs e)
         {
             if (gameState.GameOver)
+            {
+                return;
+            }
+            else if (gameState.Paused)
             {
                 return;
             }
@@ -195,6 +211,31 @@ namespace TetrisWPF
         }
 
         private async void PlayAgain_Click (object sender, RoutedEventArgs e)
+        {
+            Terminate = true;
+            gameState = new GameState();
+            await GameLoop();
+            Terminate = false;
+        }
+
+        private void Quit_Click (object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Pause_Click (object sender, RoutedEventArgs e)
+        {
+            PauseMenu.Visibility = Visibility.Visible;
+            gameState.Paused = true;
+        }
+
+        private void Resume_Click (object sender, EventArgs e)
+        {
+            PauseMenu.Visibility = Visibility.Hidden;
+            gameState.Paused = false;
+        }
+
+        private async void GameOverPlayAgain_Click (object sender, RoutedEventArgs e)
         {
             gameState = new GameState();
             GameOverMenu.Visibility = Visibility.Hidden;

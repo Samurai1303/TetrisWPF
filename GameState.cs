@@ -27,7 +27,12 @@
         public GameGrid GameGrid { get; }
         public BlockQueue BlockQueue { get; }
         public bool GameOver { get; private set; }
+        public bool Paused { get; set; }
+        public bool Terminate { get; set; }
+        public int LinesCleared { get; set; }
+        public int Level { get; private set; }
         public int Score { get; private set; }
+        public int HighScore { get; private set; }
         public Block HeldBlock { get; private set; }
         public bool CanHold { get; private set; }
 
@@ -36,7 +41,9 @@
             GameGrid = new GameGrid(22, 10);
             BlockQueue = new BlockQueue();
             CurrentBlock = BlockQueue.GetAndUpdate();
+            HighScore = Properties.Settings.Default.HighScoreValue;
             CanHold = true;
+            Paused = false;
         }
 
         private bool BlockFits ()
@@ -126,11 +133,18 @@
                 GameGrid[p.Row, p.Column] = CurrentBlock.Id;
             }
 
-            Score += GameGrid.ClearFullRows();
+            LinesCleared += GameGrid.ClearFullRows();
+            Score = LinesCleared * 100;
 
             if (IsGameOver())
             {
                 GameOver = true;
+                if (Score > HighScore)
+                {
+                    HighScore = Score;
+                    Properties.Settings.Default.HighScoreValue = HighScore;
+                    Properties.Settings.Default.Save();
+                }
             }
             else
             {

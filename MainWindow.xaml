@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="TetrisWPF" Height="1000" Width="725"
+        Title="TetrisWPF" Height="1000" Width="735"
         Foreground="White"
-        FontFamily="Segoe UI Light" FontSize="28"
+        FontFamily= "Assets/Fonts/#Machine Gunk" FontSize="30"
         KeyDown="Window_KeyDown">
 
     <Window.Resources>
@@ -116,26 +116,53 @@
             <StackPanel HorizontalAlignment="Left"
                         Margin="0, 30, 0, 70">
                 <TextBlock x:Name="HighScoreText"
-                           Text="High Score: 9999"
+                           Text="High Score: 99999"
                            TextAlignment="Left"/>
 
                 <TextBlock x:Name="ScoreText"
-                           Text="Score: 9999"
+                           Text="Score: 99999"
                            TextAlignment="Center"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom"
                         HorizontalAlignment="Center">
+                <Button Content="Pause" 
+                        Style="{DynamicResource ButtonStyle}"
+                        Width="200"
+                        Margin="0, 65, 0, 0"
+                        Click="Pause_Click"/>
+                
                 <Button Content="Play Again" 
                         Style="{DynamicResource ButtonStyle}"
                         Width="200"
-                        Margin="0, 115, 0, 25"
+                        Margin="0, 25, 0, 25"
                         Click="PlayAgain_Click"/>
-                <Button Content="Exit" 
+
+                <Button Content="Quit" 
                         Style="{DynamicResource ButtonStyle}"
-                        Width="200"/>
+                        Width="200"
+                        Click="Quit_Click"/>
             </StackPanel>
         </StackPanel>
+        
+        <Grid x:Name="PauseMenu"
+              Background="#EE000000"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
+              Visibility="Hidden">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Paused"
+                           FontSize="48"
+                           TextAlignment="Center"
+                           Margin="20"/>
 
+                <Button Content="Resume"
+                        Style="{DynamicResource ButtonStyle}"
+                        Width="200"
+                        Click="Resume_Click"/>
+            </StackPanel>
+        </Grid>
+        
         <Grid x:Name="GameOverMenu"
               Background="#CC000000"
               Grid.RowSpan="2"
@@ -153,10 +180,9 @@
                            TextAlignment="Center"/>
 
                 <Button Content="Play Again"
-                        Background="LightGreen"
-                        Margin="0,20,0,0"
-                        Padding="5"
-                        Click="PlayAgain_Click"/>
+                        Style="{DynamicResource ButtonStyle}"
+                        Width="200"
+                        Click="GameOverPlayAgain_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
