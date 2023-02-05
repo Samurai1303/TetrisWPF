@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Fonts\MachineGunk-nyqg.ttf" />
     <None Remove="Assets\Images\Background.jpg" />
     <None Remove="Assets\Images\Block-Empty.png" />
     <None Remove="Assets\Images\Block-I.png" />
@@ -29,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Fonts\MachineGunk-nyqg.ttf" />
     <Resource Include="Assets\Images\Background.jpg" />
     <Resource Include="Assets\Images\Block-Empty.png" />
     <Resource Include="Assets\Images\Block-I.png" />
@@ -47,6 +49,21 @@
     <Resource Include="Assets\Images\TilePurple.png" />
     <Resource Include="Assets\Images\TileRed.png" />
     <Resource Include="Assets\Images\TileYellow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
